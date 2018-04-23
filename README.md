@@ -9,6 +9,7 @@ others may have to lend out. This part of the project is only for the UI part.</
 <li>Redux</li>
 <li>Material UI</li>
 <li>MomentJS</li>
+<li>Gravatar</li>
 </ul>
 
 <h2>Author</h2>
