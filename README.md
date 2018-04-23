@@ -29,7 +29,7 @@ others may have to lend out. This part of the project is only for the UI part.</
 
 `json-server --watch db.json`
 
-<h3>Run dev</h3>
+<h3>Npm Start</h3>
 
-`npm run dev`
+`npm start`
 
