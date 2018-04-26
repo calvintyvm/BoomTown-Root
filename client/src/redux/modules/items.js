@@ -32,7 +32,7 @@ const initialState = {
 
 
 export const fetchItemsFromUrl = () => dispatch => {
-const urls = ['http://localhost:3000/items', 'http://localhost:3000/users'];
+const urls = ['http://localhost:3001/items', 'http://localhost:3001/users'];
 const combineItemsAndUsers = itemsAndUsers => {
 itemsAndUsers[0].forEach(item => {
   itemsAndUsers[1].forEach(user => {

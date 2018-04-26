@@ -18,7 +18,7 @@ const icon = (
 
 class HeaderBar extends Component {
   componentDidMount() {
-    const urls = ['http://localhost:3000/items", "http:://localhost:3000/users'];
+    const urls = ['http://localhost:3001/items", "http:://localhost:3001/users'];
     this.props.dispatch(fetchItemsFromUrl(urls));
   }
 
