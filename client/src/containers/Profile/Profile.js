@@ -13,21 +13,17 @@ import './styles.css';
 const styleAvatar = {
   borderRadius: 100
 };
-const Profile = props => {
-  let profileArray = [];
+const Profile = ({profileData}) => {
   return (
       <div className="cardContainer">
-          {props.profile.forEach((item) => {
-        profileArray = item.itemowner;
-      })}
           <Card className="card">
               <div className="innerCardContainer">
                   <div>
-                      <CardTitle className="cardTitle" title={profileArray.fullname} />
-                      <CardTitle className="cardSubTitle" subtitle={profileArray.bio} />
+                      <CardTitle className="cardTitle" title={profileData.fullname} />
+                      <CardTitle className="cardSubTitle" subtitle={profileData.bio} />
                   </div>
                   <div style={{ marginLeft: '2rem' }}>
-                      <CardText className="cardNumber">{props.profile.length}</CardText>
+                      <CardText className="cardNumber">{profileData.owneditems.length}</CardText>
                       <CardText className="cardText">Items Shared</CardText>
                       <CardText className="cardNumber">0</CardText>
                       <CardText className="cardText">Items Borrowed</CardText>
@@ -36,7 +32,7 @@ const Profile = props => {
                       className="cardAvatar"
                       avatar={
                           <Gravatar
-                              email={profileArray.email}
+                              email={profileData.email}
                               size={180}
                               style={styleAvatar}
                           />

@@ -5,39 +5,62 @@ import CircularProgress from 'material-ui/CircularProgress';
 import Profile from './Profile';
 import ItemCardList from '../../components/ItemCardList';
 import { fetchProfileFromUrl } from '../../redux/modules/profile';
+import gql from 'graphql-tag';
+import { Query, graphql } from 'react-apollo';
+import ItemCard from '../../components/ItemCard';
 
-class ProfileContainer extends Component {
-  componentDidMount() {
-    this.props.dispatch(fetchProfileFromUrl(this.props.match.params.id));
+const fetchItemsProfile = gql`
+query user($id: ID!) {
+  user(id: $id) {
+    id
+    email
+    fullname
+    bio
+    owneditems {
+        title
+        description
+        imageurl
+        tags
+        created
+        available
+        itemowner {
+            id
+            fullname
+            email
+        }
+    }
+       }
   }
+  `;
+class ProfileContainer extends Component {
 
   render() {
-    return (
-
+    const id = this.props.match.params.id;
+    return (<Query query={fetchItemsProfile} variables={{id}}>
+        {
+      ({ loading, error, data }) => {
+        if (loading) return <p>Loading....</p>;
+        if (error) return <p>Error getting items</p>;
+        return (
         <div>
-            {
-              (this.props.profile.isLoading) ? (
-                  <CircularProgress className="loadingIcon" thickness={7} />) :
-                (<div>
-                    <Profile itemsData={this.props.profile.profile} />
-                    <ItemCardList itemsData={this.props.profile.profile} />
-                </div>
-                )}
-
+        <Profile profileData={data.user} />
+        <ItemCardList itemsData={data.user.owneditems}/>
         </div>
+        )
+      }
+    }
+    </Query>
     );
-  }
 }
+}
+export default ProfileContainer;
 
-ProfileContainer.propTypes = {
-  match: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  profile: PropTypes.shape({
-    profile: PropTypes.array,
-    isLoading: PropTypes.boolean
-  }).isRequired
-};
 
-export default connect(state => ({
-    profile: state.profileData
-  }))(ProfileContainer);
+// ProfileContainer.propTypes = {
+//   match: PropTypes.object.isRequired,
+//   dispatch: PropTypes.func.isRequired,
+//   profile: PropTypes.shape({
+//     profile: PropTypes.array,
+//     isLoading: PropTypes.boolean
+//   }).isRequired
+// };
