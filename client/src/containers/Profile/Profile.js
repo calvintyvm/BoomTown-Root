@@ -25,7 +25,7 @@ const Profile = ({profileData}) => {
                   <div style={{ marginLeft: '2rem' }}>
                       <CardText className="cardNumber">{profileData.owneditems.length}</CardText>
                       <CardText className="cardText">Items Shared</CardText>
-                      <CardText className="cardNumber">0</CardText>
+                      <CardText className="cardNumber">{profileData.borroweditems.length}</CardText>
                       <CardText className="cardText">Items Borrowed</CardText>
                   </div>
                   <CardHeader

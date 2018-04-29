@@ -48,7 +48,7 @@ class ItemsContainer extends Component {
     return (<Query query={fetchItems}>
         {
       ({ loading, error, data }) => {
-        if (loading) return <p>Loading....</p>;
+        if (loading) return  <CircularProgress className="loadingIcon" thickness={7} />;
         if (error) return <p>Error getting items</p>;
         return <Items itemsData={data.items} />;
       }
@@ -69,4 +69,3 @@ export default ItemsContainer;
   //     dispatch: PropTypes.func
   //   }).isRequired
   // };
-

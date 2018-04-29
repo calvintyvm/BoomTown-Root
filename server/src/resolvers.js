@@ -46,7 +46,36 @@ const resolveFunctions = {
             return fetch(`http://localhost:3001/items/?borrower=${id}`)
             .then(response=>response.json())
         }
-    }
+    },
+     Mutation: {
+        async addItem(root, item) {
+        // var body = { a: 1 };
+          const newItem = {
+            title: item.title,
+            description: item.description,
+            imageurl: item.imageurl,
+            tags: item.tags,
+            itemowner: item.itemowner,
+            created:item.created,
+            available:item.available,
+            borrower: item.borrower
+          }
+    
+          try{
+            await fetch(`http://localhost:3001/items/`,{method: 'POST', body: JSON.stringify(newItem),
+            headers: { 'Content-Type': 'application/json' }})
+            .then(response=>response.json())
+            return newItem;
+          } catch(e){
+              return null;
+          }
+
+        
+        //   data.item.push(newItem);
+        //   return newItem;
+
+        }
+      }
 
 
 };

@@ -7,7 +7,7 @@ import ItemCardList from '../../components/ItemCardList';
 import { fetchProfileFromUrl } from '../../redux/modules/profile';
 import gql from 'graphql-tag';
 import { Query, graphql } from 'react-apollo';
-import ItemCard from '../../components/ItemCard';
+
 
 const fetchItemsProfile = gql`
 query user($id: ID!) {
@@ -16,6 +16,9 @@ query user($id: ID!) {
     email
     fullname
     bio
+    borroweditems{
+      id
+    }
     owneditems {
         title
         description
@@ -39,7 +42,7 @@ class ProfileContainer extends Component {
     return (<Query query={fetchItemsProfile} variables={{id}}>
         {
       ({ loading, error, data }) => {
-        if (loading) return <p>Loading....</p>;
+        if (loading) return  <CircularProgress className="loadingIcon" thickness={7} />;
         if (error) return <p>Error getting items</p>;
         return (
         <div>
