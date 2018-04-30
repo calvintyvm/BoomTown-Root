@@ -10,12 +10,12 @@ export const getUserBorrowedItems = (id) => {
             .then(response=>response.json())
 }
 
-export const getIndividualItems = (id) => {
-    return fetch (`http://localhost:3001/items/${id}`)
+export const getItemownerUser = (id) => {
+    return fetch (`http://localhost:3001/users/${id}`)
             .then(response=>response.json())
 }
 
-export const getIndividualUsers = (id) => {
+export const getItemBorrowerUser = (id) => {
     return fetch (`http://localhost:3001/users/${id}`)
             .then(response=>response.json())
 }

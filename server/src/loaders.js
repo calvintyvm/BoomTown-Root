@@ -1,5 +1,5 @@
 import DataLoader from 'dataloader';
-import { getUserOwnedItems, getIndividualItems } from './jsonServer'
+import { getUserOwnedItems, getUserBorrowedItems, getItemownerUser,ItemBorrowerUser } from './jsonServer'
 
 export function Loaders() {
     return {
@@ -9,11 +9,11 @@ export function Loaders() {
         UserBorrowedItems: new DataLoader((ids) =>{
             return Promise.all(ids.map(id => getBorrowedItems(id)))
         }),
-        IndividualItems: new DataLoader((ids)=>{
-            return Promise.all(ids.map(id=>getIndividualItems(id)))
+        ItemownerUser: new DataLoader((ids)=>{
+            return Promise.all(ids.map(id=>getItemownerUser(id)))
         }),
-        IndividualUsers: new DataLoader((ids)=>{
-            return Promise.all(ids.map(id=>getIndividualUsers(id)))
+        ItemBorrowerUser: new DataLoader((ids)=>{
+            return Promise.all(ids.map(id=>getItemBorrowerUser(id)))
         })
 
 
