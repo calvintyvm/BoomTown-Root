@@ -1,34 +1,26 @@
 import express from "express";
-import bodyParser from "body-parser";
-import { graphqlExpress, graphiqlExpress } from "apollo-server-express"
-import schema from "./schema";
+import schema from "./api/schema";
 import cors from "cors";
+import initConfigs from './config';
+import initAPI from './api';
+import { Loaders } from './api/loaders';
+// console.log(Loaders())
 
-import { Loaders } from './loaders';
-console.log(Loaders())
+// app.set('DEV_JSON_SERVER', 'http://localhost:3001/');
 
 const port = 3300;
 const app = express();
 app.use("*", cors());
 
-// const schema = {schema};
-// /graphql endpoint
-app.use("/graphql", bodyParser.json(), 
-graphqlExpress({ 
-  schema,
-  context: {
-    fun : true, 
-    loaders: Loaders()
-  }  
-}));
 
-// /graphiql endpoint give us graphical interface 
-app.use(
-    "/graphiql",
-    graphiqlExpress({
-      endpointURL: "/graphql",
-    })
-  );
+
+initConfigs(app);
+//app.get
+
+console.log(process.env.PGPASSWORD);
+
+
+initAPI(app);
 
 
 app.listen(port,() => console.log(`Express GraphQL Server running. Access GraphIQL on http://localhost:${port}/graphiql .`));

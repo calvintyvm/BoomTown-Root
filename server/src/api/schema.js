@@ -1,7 +1,3 @@
-
-import { makeExecutableSchema } from "graphql-tools";
-//resolvers pull data
-import resolvers from "./resolvers"; // Next step!
 // Tags = array of strings
 // itemowner ( based on User)
 //edges but it on both
@@ -44,7 +40,5 @@ const typeDefs = `
 
 `;
 
-export default makeExecutableSchema({
-  typeDefs,
-  resolvers
-});
+
+export default typeDefs;

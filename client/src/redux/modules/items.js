@@ -2,6 +2,7 @@ const GET_ITEMS = 'GET_ITEMS';
 const GET_IS_LOADING = 'GET_IS_LOADING';
 const GET_ERROR = 'GET_ERROR';
 const GET_ITEM_FILTERS = 'GET_ITEM_FILTERS';
+
 export const getItems = (items) => ({
   type: GET_ITEMS,
   payload: items
