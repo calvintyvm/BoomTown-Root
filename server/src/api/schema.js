@@ -18,6 +18,7 @@ const typeDefs = `
     owneditems: [Item]
     borroweditems: [Item]
   } 
+ 
   type Query {
     items: [Item]
     users: [User]
@@ -30,8 +31,7 @@ const typeDefs = `
       description: String!
       imageurl: String!
       itemowner: String!
-      tags: [String]
-      created: String!
+      tags: [String]!
       available: Boolean!
       borrower: String
     ): Item
