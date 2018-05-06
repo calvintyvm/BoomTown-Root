@@ -38,6 +38,7 @@ export default function(app) {
       const user = await fetch(`${jsonApi}/users/${borrower}`);
       const json = await user.json();
       if (!json.id) return null;
+      console.log("hello");
       return json;
     },
     getItemOwner(itemowner) {

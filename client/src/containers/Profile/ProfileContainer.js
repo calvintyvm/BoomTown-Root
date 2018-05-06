@@ -8,56 +8,62 @@ import { fetchProfileFromUrl } from '../../redux/modules/profile';
 import gql from 'graphql-tag';
 import { Query, graphql } from 'react-apollo';
 
-
 const fetchItemsProfile = gql`
-query user($id: ID!) {
-  user(id: $id) {
-    id
-    email
-    fullname
-    bio
-    borroweditems{
-      id
-    }
-    owneditems {
-        title
-        description
-        imageurl
-        tags
-        created
-        available
-        itemowner {
+    query user($id: ID!) {
+        user(id: $id) {
             id
-            fullname
             email
+            fullname
+            bio
+            borroweditems {
+                id
+            }
+            owneditems {
+                title
+                description
+                imageurl
+                tags
+                created
+                available
+                itemowner {
+                    id
+                    fullname
+                    email
+                }
+            }
         }
     }
-       }
-  }
-  `;
+`;
 class ProfileContainer extends Component {
-
-  render() {
-    const id = this.props.match.params.id;
-    return (<Query query={fetchItemsProfile} variables={{id}}>
-        {
-      ({ loading, error, data }) => {
-        if (loading) return  <CircularProgress className="loadingIcon" thickness={7} />;
-        if (error) return <p>Error getting items</p>;
+    render() {
+        const id = this.props.match.params.id;
         return (
-        <div>
-        <Profile profileData={data.user} />
-        <ItemCardList itemsData={data.user.owneditems}/>
-        </div>
-        )
-      }
+            <Query query={fetchItemsProfile} variables={{ id }}>
+                {({ loading, error, data }) => {
+                    if (loading) {
+                        return (
+                            <CircularProgress
+                                className="loadingIcon"
+                                thickness={7}
+                            />
+                        );
+                    }
+                    if (error) return <p>Error getting items</p>;
+                    return (
+                        <div>
+                            <Profile profileData={data.user} />
+                            <ItemCardList
+                                itemsData={data.user.owneditems}
+                                itemFilters={[]}
+                            />
+                        </div>
+                    );
+                }}
+            </Query>
+        );
     }
-    </Query>
-    );
-}
 }
 export default ProfileContainer;
-
 
 // ProfileContainer.propTypes = {
 //   match: PropTypes.object.isRequired,

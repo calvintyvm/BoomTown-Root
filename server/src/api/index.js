@@ -35,8 +35,8 @@ export default function(app) {
       context: {
         loaders: createLoaders({
           jsonResources,
-          pgResources,
-          firebaseResources
+          firebaseResources,
+          pgResources
         })
       }
     })

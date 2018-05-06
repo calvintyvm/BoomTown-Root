@@ -5,14 +5,15 @@ import ItemCardList from '../../components/ItemCardList';
 
 const Items = props => (
     <div>
-        <ItemCardList itemsData={props.itemsData} />
+        <ItemCardList
+            itemsData={props.itemsData}
+            itemFilters={props.itemFilters}
+        />
     </div>
-  );
-
+);
 
 export default Items;
 
-Items.propTypes = {
-  itemsData: PropTypes.array.isRequired
-};
-
+// Items.propTypes = {
+//   itemsData: PropTypes.array.isRequired
+// };

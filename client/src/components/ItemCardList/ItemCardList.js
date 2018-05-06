@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import Masonry from 'react-masonry-component';
 import ItemCard from '../../components/ItemCard';
 
-
 // ask about left
 const styles = {
-  width: '100vw',
-  left: '7.5%'
+    width: '100vw',
+    left: '7.5%'
 };
 
 const masonryOptions = {
-  horizontalOrder: true,
-  columnWidth: 350,
-  gutter: 20
+    horizontalOrder: true,
+    columnWidth: 350,
+    gutter: 20
 };
 
 const ItemCardList = props => (
@@ -24,16 +23,27 @@ const ItemCardList = props => (
         updateOnEachImageLoad
         style={styles}
     >
-        {props.itemsData.map((item, index) => (
-            <li key={index}>
-                <ItemCard itemsData={item} />
-            </li>
-      ))}
+        {props.itemFilters.length !== 0
+            ? props.itemFilters.map(filter => {
+                const filteredItems = props.itemsData.filter(item =>
+                    item.tags.includes(filter)
+                );
+                return filteredItems.map((item, index) => (
+                    <li key={index} className={'grid-item'}>
+                        <ItemCard itemsData={item} />
+                    </li>
+                ));
+            })
+            : props.itemsData.map((item, index) => (
+                <li key={index} className={'grid-item'}>
+                    <ItemCard itemsData={item} />
+                </li>
+            ))}
     </Masonry>
-  );
+);
 
 export default ItemCardList;
 
 ItemCard.propTypes = {
-  itemsData: PropTypes.object.isRequired,
+    itemsData: PropTypes.object.isRequired
 };

@@ -1,36 +1,42 @@
 import * as firebase from "firebase";
 
 export default function(app) {
-  firebase.initializeApp({
-    apiKey: "AIzaSyAmRK7Dryl0fMWBEA3-q0odFK8A6Ct7Skw",
-    authDomain: "boomtown-c8fa1.firebaseapp.com",
-    databaseURL: "https://boomtown-c8fa1.firebaseio.com"
-  });
-  console.log(app.get("FIREBASE_DB_URL"));
-  const FirebaseDB = firebase.database();
+  // Initialize Firebase
+  var config = {
+    apiKey: app.get("FIREBASE_API_KEY"),
+    authDomain: app.get("FIREBASE_AUTH_DOMAIN"),
+    databaseURL: app.get("FIREBASE_DB_URL"),
+    projectId: app.get("FIREBASE_PROJECT_ID"),
+    storageBucket: app.get("FIREBASE_STORAGE_BUCKET"),
+    messagingSenderId: app.get("FIREBASE_MESS_SENDID")
+  };
+  firebase.initializeApp(config);
+
+  const firebaseDB = firebase.database();
 
   return {
-    getUsers: () =>
-      new Promise(resolve => {
-        FirebaseDB.ref("/users")
+    getUsers: () => {
+      return new Promise(resolve => {
+        firebaseDB
+          .ref("/users")
           .once("value")
           .then(snapshot => {
             const userList = [];
             const users = snapshot.val();
 
             Object.keys(users).forEach(id =>
-              userList.push({
-                ...users[id],
-                id
-              })
+              userList.push({ ...users[id], id })
             );
+
             resolve(userList);
           })
           .catch(error => console.log(error));
-      }),
-    getUser: id =>
-      new Promise(resolve => {
-        FirebaseDB.ref(`/users/${id}`)
+      });
+    },
+    getUser: id => {
+      return new Promise(resolve => {
+        firebaseDB
+          .ref(`/users/${id}/`)
           .once("value")
           .then(snapshot => {
             resolve({
@@ -39,6 +45,7 @@ export default function(app) {
             });
           })
           .catch(error => console.log(error));
-      })
+      });
+    }
   };
 }
