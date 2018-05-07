@@ -50,7 +50,7 @@ const Profile = ({ profileData }) => (
 // export default Profile;
 
 Profile.propTypes = {
-    profile: PropTypes.array.isRequired
+    profileData: PropTypes.object.isRequired
 };
 
 export default connect(state => ({

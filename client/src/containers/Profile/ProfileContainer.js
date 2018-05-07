@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 import CircularProgress from 'material-ui/CircularProgress';
 import Profile from './Profile';
 import ItemCardList from '../../components/ItemCardList';

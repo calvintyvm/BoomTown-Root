@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
 import moment from 'moment';
 import * as firebase from 'firebase';
-import { firebaseAuth } from '../../config/firebaseConfig';
-import Gravatar from 'react-gravatar';
+// import { firebaseAuth } from '../../config/firebaseConfig';
+// import Gravatar from 'react-gravatar';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import LinearProgress from 'material-ui/LinearProgress';
@@ -12,7 +12,6 @@ import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import {
     Card,
-    CardActions,
     CardHeader,
     CardTitle,
     CardMedia,
@@ -23,9 +22,9 @@ import TextField from 'material-ui/TextField';
 import './styles.css';
 import placeholder from '../../images/placeholder.jpg';
 
-const config = {
-    storageBucket: 'boomtown-c8fa1.appspot.com'
-};
+// const config = {
+//     storageBucket: 'boomtown-c8fa1.appspot.com'
+// };
 // firebase.initializeApp(config);
 
 const ADD_ITEM = gql`
@@ -90,7 +89,7 @@ class Share extends Component {
     };
 
     onSubmit(values, addItem) {
-        console.log('Submitted!');
+        // console.log('Submitted!');
     }
 
     validatation(title, description) {
@@ -125,7 +124,7 @@ class Share extends Component {
     }
 
     validate = formValues => {
-        console.log('Validating', formValues, this.state.tags);
+        // console.log('Validating', formValues, this.state.tags);
     };
 
     handleTags = values => {
@@ -139,7 +138,7 @@ class Share extends Component {
     };
 
     handleImageUpload = input => {
-        console.log(input.target.files[0].name);
+        // console.log(input.target.files[0].name);
         const storageRef = firebase.storage().ref();
         const file = input.target.files[0];
         const name = `${+new Date()} - ${file.name}`;
@@ -150,7 +149,7 @@ class Share extends Component {
         task
             .then(snapshot => {
                 const url = snapshot.downloadURL;
-                console.log(url);
+                // console.log(url);
                 this.setState({ newImageurl: url });
             })
             .catch(error => {

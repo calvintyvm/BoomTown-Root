@@ -22,7 +22,7 @@ import { updateAuthState, userLoading } from './redux/modules/auth';
 let gotProfile = false;
 store.subscribe(() => {
     const values = store.getState();
-    console.log(values);
+    // console.log(values);
     if (!values.auth.authenticated !== 'LOADING_USER' && !gotProfile) {
         gotProfile = true;
         store.dispatch(userLoading(true));
@@ -30,12 +30,12 @@ store.subscribe(() => {
 });
 
 firebaseAuth.onAuthStateChanged(user => {
-    console.log('checking for user...');
+    // console.log('checking for user...');
     if (user) {
-        console.log('working');
+        // console.log('working');
         store.dispatch(updateAuthState(true));
     } else {
-        console.log('not working');
+        // console.log('not working');
         store.dispatch(updateAuthState(true));
     }
 });

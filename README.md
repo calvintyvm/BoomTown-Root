@@ -11,6 +11,13 @@ others may have to lend out. This part of the project is only for the UI part.</
 <li>Material UI</li>
 <li>MomentJS</li>
 <li>Gravatar</li>
+
+<h2>Backend Used </h2>
+<ul>
+<li>Express</li>
+<li>Apollo</li>
+<li>Firebase</li>
+<li>PostgreSQL</li>
 </ul>
 
 <h2>Author</h2>
@@ -23,13 +30,13 @@ others may have to lend out. This part of the project is only for the UI part.</
 
 `npm install`
 
-<h3>Global install JSON Server </h3>
+<h3>cd To Server in Boomtown </h3>
 
-`npm install -g json-server`
+`cd server`
 
 <h3>Run Server Watch</h3>
 
-`json-server --watch db.json`
+`npm run dev`
 
 <h3>cd to Client in BoomTown.</h3>
 
@@ -37,5 +44,4 @@ others may have to lend out. This part of the project is only for the UI part.</
 
 <h3>Npm Start</h3>
 
-`npm start`
-
+`npm run dev`

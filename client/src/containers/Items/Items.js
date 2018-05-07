@@ -14,6 +14,6 @@ const Items = props => (
 
 export default Items;
 
-// Items.propTypes = {
-//   itemsData: PropTypes.array.isRequired
-// };
+Items.propTypes = {
+    itemsData: PropTypes.array.isRequired
+};

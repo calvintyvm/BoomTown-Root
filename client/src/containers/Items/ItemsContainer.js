@@ -52,11 +52,6 @@ export default connect(state => ({
 }))(ItemsContainer);
 // export default graphql(fetchItems)(ItemsContainer);
 
-// ItemsContainer.propTypes = {
-//   dispatch: PropTypes.func.isRequired,
-//   itemsData: PropTypes.shape({
-//     isLoading: PropTypes.bool,
-//     items: PropTypes.array,
-//     dispatch: PropTypes.func
-//   }).isRequired
-// };
+ItemsContainer.propTypes = {
+    itemFilters: PropTypes.array.isRequired
+};
