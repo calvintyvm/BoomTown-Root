@@ -237,9 +237,7 @@ class Share extends Component {
                             />
                         </CardMedia>
 
-                        <CardHeader
-                            subtitle={moment().fromNow()}
-                        />
+                        <CardHeader subtitle={moment().fromNow()} />
                         <CardTitle
                             title={this.state.newTitle}
                             subtitle={this.state.tags.map((tag, index) => (

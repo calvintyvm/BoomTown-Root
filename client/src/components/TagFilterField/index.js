@@ -1,4 +1,3 @@
-import TagFilterField from "./TagFilterField";
+import TagFilterField from './TagFilterField';
 
 export default TagFilterField;
-
