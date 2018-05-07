@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
 import Items from './Items';
 import './styles.css';
-import { fetchItemsFromUrl } from '../../redux/modules/items';
+// import { fetchItemsFromUrl } from '../../redux/modules/items';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 

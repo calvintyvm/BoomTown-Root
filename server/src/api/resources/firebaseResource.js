@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-
+import "firebase/auth";
 export default function(app) {
   // Initialize Firebase
   var config = {
@@ -10,7 +10,8 @@ export default function(app) {
     storageBucket: app.get("FIREBASE_STORAGE_BUCKET"),
     messagingSenderId: app.get("FIREBASE_MESS_SENDID")
   };
-  firebase.initializeApp(config);
+  const firebaseApp = firebase.initializeApp(config);
+  // const firebaseAuth = firebaseApp.auth();
 
   const firebaseDB = firebase.database();
 

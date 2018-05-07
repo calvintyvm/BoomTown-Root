@@ -27,7 +27,6 @@ const initialState = {
     itemFilters: [],
     error: ''
 };
-// all our function first
 
 export const fetchItemsFromUrl = () => dispatch => {
     const urls = ['http://localhost:3001/items', 'http://localhost:3001/users'];
@@ -42,7 +41,6 @@ export const fetchItemsFromUrl = () => dispatch => {
         return itemsAndUsers[0];
     };
 
-    // we use functions when we need to
     dispatch(getIsLoading());
     Promise.all(urls.map(url => fetch(url).then(resp => resp.json())))
         .then(responses => dispatch(getItems(combineItemsAndUsers(responses))))

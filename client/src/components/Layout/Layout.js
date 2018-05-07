@@ -5,15 +5,11 @@ import FooterBar from '../Footer';
 import './styles.css';
 
 const Layout = ({ children }) => (
-
     <div className="appContentWrapper">
         <div className="appHeader">
             <HeaderBar />
-
         </div>
-        <div className="appContent">
-            {children}
-        </div>
+        <div className="appContent">{children}</div>
         <FooterBar />
     </div>
 );

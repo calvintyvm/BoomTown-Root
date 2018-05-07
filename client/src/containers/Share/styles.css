@@ -2,9 +2,22 @@ p {
   color: white;
 }
 .card-preview {
-  width: 40%;
+  width: 50%;
+  margin-left: 10%;
 }
 
 .main {
   display: flex;
+  margin-top: 5%;
+}
+
+form {
+  width: 100%;
+  margin-left: 5%;
+}
+
+.progress {
+  width: 70% !important;
+  margin-top: 2% !important;
+  margin-bottom: 2% !important;
 }

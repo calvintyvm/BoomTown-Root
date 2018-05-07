@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CircularProgress from 'material-ui/CircularProgress';
 import Profile from './Profile';
 import ItemCardList from '../../components/ItemCardList';
-import { fetchProfileFromUrl } from '../../redux/modules/profile';
+// import { fetchProfileFromUrl } from '../../redux/modules/profile';
 import gql from 'graphql-tag';
 import { Query, graphql } from 'react-apollo';
 
@@ -51,6 +51,7 @@ class ProfileContainer extends Component {
                     if (error) return <p>Error getting items</p>;
                     return (
                         <div>
+                            {console.log(data.user.owneditems)}
                             <Profile profileData={data.user} />
                             <ItemCardList
                                 itemsData={data.user.owneditems}

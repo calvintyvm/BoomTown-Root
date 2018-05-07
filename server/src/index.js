@@ -13,16 +13,16 @@
 
 // // const schema = {schema};
 // // /graphql endpoint
-// app.use("/graphql", bodyParser.json(), 
-// graphqlExpress({ 
+// app.use("/graphql", bodyParser.json(),
+// graphqlExpress({
 //   schema,
 //   context: {
-//     fun : true, 
+//     fun : true,
 //     loaders: Loaders()
-//   }  
+//   }
 // }));
 
-// // /graphiql endpoint give us graphical interface 
+// // /graphiql endpoint give us graphical interface
 // app.use(
 //     "/graphiql",
 //     graphiqlExpress({
@@ -30,31 +30,28 @@
 //     })
 //   );
 
-
 // app.listen(port,() => console.log(`Express GraphQL Server running. Access GraphIQL on http://localhost:${port}/graphiql .`));
 
+import express from "express";
+import cors from "cors";
+import { Pool } from "pg";
 
-
-import express from 'express';
-import cors from 'cors';
-import { Pool } from 'pg';
-
-import initConfigs from './configs';
-import initAPI from './api';
+import initConfigs from "./configs";
+import initAPI from "./api";
 
 const app = express();
 const port = 3300;
 
 initConfigs(app);
 
-app.use('*', cors());
+app.use("*", cors());
 
 initAPI(app);
 
 app.listen(
-    port,
-    err =>
-        err
-            ? console.log(`ERROR: ${err}`)
-            : console.log(`Express running on PORT: http://localhost:${port}`)
+  port,
+  err =>
+    err
+      ? console.log(`ERROR: ${err}`)
+      : console.log(`Express running on PORT: http://localhost:${port}`)
 );

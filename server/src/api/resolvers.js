@@ -8,14 +8,14 @@ import {
 
 const jsonApi = "http://localhost:3001";
 
-export default function({ jsonResources, pgResources, fbResources }) {
+export default function({ jsonResources, pgResources, firebaseResources }) {
   return {
     Query: {
       items(root) {
         return pgResources.getItems();
       },
       users(root) {
-        return fbResources.getUsers();
+        return firebaseResources.getUsers();
       },
       item(root, { id }, context) {
         return context.loaders.SingleItem.load(id);
@@ -25,8 +25,10 @@ export default function({ jsonResources, pgResources, fbResources }) {
       }
     },
     Item: {
-      async borrower({ borrower }) {
-        return jsonResources.getBorrower();
+      borrower({ borrower }, args, context) {
+        if (borrower) {
+          return context.loaders.ItemOwner.load(borrower);
+        }
       },
       itemowner({ itemowner }, args, context) {
         return context.loaders.ItemOwner.load(itemowner);

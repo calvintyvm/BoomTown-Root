@@ -8,6 +8,8 @@ import logo from '../../images/boomtown-logo.svg';
 import './styles.css';
 import TagFilterField from '../TagFilterField';
 import { fetchItemsFromUrl } from '../../redux/modules/items';
+// import firebase from 'firebase';
+// import { firebaseAuth } from '../../config/firebaseConfig';
 
 const icon = (
     <Link to="/">
@@ -53,11 +55,13 @@ class HeaderBar extends Component {
                     />
                 ) : null}
                 <div>
+                    {/* <Link to={`/profile/${firebaseAuth.currentUser.uid}`}> */}
                     <RaisedButton
                         primary
                         className="profileButton"
                         label="My Profile"
                     />
+                    {/* </Link> */}
                     <RaisedButton secondary label="Logout" />
                 </div>{' '}
             </AppBar>

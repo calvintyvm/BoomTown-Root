@@ -6,15 +6,15 @@ import Login from './Login';
 // container always stateful component
 
 class LoginContainer extends Component {
-  static propTypes = {};
+    static propTypes = {};
 
-  login = () => {
-    console.log('You clicked the login button.');
-  };
+    login = () => {
+        console.log('You clicked the login button.');
+    };
 
-  render() {
-    return <Login login={this.login} />;
-  }
+    render() {
+        return <Login login={this.login} />;
+    }
 }
 
 export default LoginContainer;

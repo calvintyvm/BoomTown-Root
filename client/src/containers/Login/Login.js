@@ -29,7 +29,12 @@ const Login = ({ login }) => (
                         <div>
                             <ValidatedTextField label="Password" />
                         </div>
-                        <RaisedButton className="enterButton" primary fullWidth type="submit">
+                        <RaisedButton
+                            className="enterButton"
+                            primary
+                            fullWidth
+                            type="submit"
+                        >
                             Enter
                         </RaisedButton>
                     </form>

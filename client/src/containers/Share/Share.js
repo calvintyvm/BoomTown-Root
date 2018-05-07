@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
 import moment from 'moment';
 import * as firebase from 'firebase';
+import { firebaseAuth } from '../../config/firebaseConfig';
+import Gravatar from 'react-gravatar';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import LinearProgress from 'material-ui/LinearProgress';
 import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
@@ -23,7 +26,7 @@ import placeholder from '../../images/placeholder.jpg';
 const config = {
     storageBucket: 'boomtown-c8fa1.appspot.com'
 };
-firebase.initializeApp(config);
+// firebase.initializeApp(config);
 
 const ADD_ITEM = gql`
     mutation addItem(
@@ -75,17 +78,29 @@ class Share extends Component {
     state = {
         finished: false,
         stepIndex: 0,
-        disabled: false,
+        disabled: true,
         tags: [],
         // state for new item
         newImageurl: '',
         newDescription: 'Profound Item Description',
-        newTitle: 'Amazing Item Title'
+        newTitle: 'Amazing Item Title',
+        completed: 0,
+        title: ' ',
+        description: ' '
     };
 
     onSubmit(values, addItem) {
         console.log('Submitted!');
     }
+
+    validatation(title, description) {
+        // true means invalid, so our conditions got reversed
+        if (title.length > 0 && description.length > 0) {
+            return this.setState({ disabled: true });
+        }
+        return null;
+    }
+
     menuItems = tags =>
         names.map(name => (
             <MenuItem
@@ -96,6 +111,18 @@ class Share extends Component {
                 primaryText={name.title}
             />
         ));
+    progress(completed) {
+        if (completed > 100) {
+            this.setState({ completed: 100 });
+        } else {
+            this.setState({ completed });
+            const diff = Math.random() * 10;
+            this.timer = setTimeout(
+                () => this.progress(completed + diff),
+                1000
+            );
+        }
+    }
 
     validate = formValues => {
         console.log('Validating', formValues, this.state.tags);
@@ -108,7 +135,7 @@ class Share extends Component {
     handleChange = (event, index, tags) => this.setState({ tags });
 
     handleImage = () => {
-        this.setState({ disabled: false });
+        this.setState({ disabled: true });
     };
 
     handleImageUpload = input => {
@@ -157,6 +184,7 @@ class Share extends Component {
 
     handleSelectClick = () => {
         document.getElementById('imageInput').click();
+        this.setState({ disabled: false });
     };
 
     renderStepActions(step) {
@@ -189,11 +217,16 @@ class Share extends Component {
     render() {
         const { finished, stepIndex } = this.state;
         const { tags } = this.state;
+        // const errors = this.validatation(
+        //     this.state.title,
+        //     this.state.description
+        // );
+        // console.log(errors);
 
         return (
             <div className="main">
-                <div>
-                    <Card className="card-preview">
+                <div className="card-preview">
+                    <Card>
                         <CardMedia>
                             <img
                                 src={
@@ -205,7 +238,9 @@ class Share extends Component {
                             />
                         </CardMedia>
 
-                        <CardHeader subtitle={moment().fromNow()} />
+                        <CardHeader
+                            subtitle={moment().fromNow()}
+                        />
                         <CardTitle
                             title={this.state.newTitle}
                             subtitle={this.state.tags.map((tag, index) => (
@@ -261,6 +296,13 @@ class Share extends Component {
                                                         of the item you're
                                                         sharing.
                                                     </p>
+                                                    <LinearProgress
+                                                        mode="determinate"
+                                                        value={
+                                                            this.state.completed
+                                                        }
+                                                        className="progress"
+                                                    />
                                                     <Field name="image">
                                                         {({ input, meta }) => (
                                                             <RaisedButton

@@ -1,16 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
+import PrivateRoute from './components/PrivateRoute';
 import muiTheme from './config/theme';
+import Login from './containers/Login';
+import Items from './containers/Items';
+import Profile from './containers/Profile';
+import Share from './containers/Share';
 import Layout from './components/Layout';
-import Routes from './Routes';
 import store from './redux/store';
 import { ApolloProvider } from 'react-apollo';
 import client from './config/apolloClient';
+// import * as Firebase from 'firebase';
+import { firebaseAuth } from './config/firebaseConfig';
+import { updateAuthState, userLoading } from './redux/modules/auth';
+
+let gotProfile = false;
+store.subscribe(() => {
+    const values = store.getState();
+    console.log(values);
+    if (!values.auth.authenticated !== 'LOADING_USER' && !gotProfile) {
+        gotProfile = true;
+        store.dispatch(userLoading(true));
+    }
+});
+
+firebaseAuth.onAuthStateChanged(user => {
+    console.log('checking for user...');
+    if (user) {
+        console.log('working');
+        store.dispatch(updateAuthState(true));
+    } else {
+        console.log('not working');
+        store.dispatch(updateAuthState(true));
+    }
+});
 // import * as Firebase from 'firebase';
 // get login and logout working
 //
@@ -32,7 +60,20 @@ const Boomtown = () => (
             <Provider store={store}>
                 <Router>
                     <Layout>
-                        <Routes />
+                        <Switch>
+                            <Route exact path="/login" component={Login} />
+                            <PrivateRoute exact path="/" component={Items} />
+                            <PrivateRoute
+                                exact
+                                path="/share"
+                                component={Share}
+                            />
+                            <PrivateRoute
+                                exact
+                                path="/profile/:id"
+                                component={Profile}
+                            />
+                        </Switch>
                     </Layout>
                 </Router>
             </Provider>

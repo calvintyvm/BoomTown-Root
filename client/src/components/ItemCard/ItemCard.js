@@ -23,7 +23,6 @@ const styleAvatar = {
 
 const ItemCard = props => {
     const item = props.itemsData;
-    const formatDate = moment(item.created).format('YYYYMMDDa');
     return (
         <div>
             <Card>
@@ -34,7 +33,10 @@ const ItemCard = props => {
                     <Link to={`/profile/${item.itemowner.id}`}>
                         <CardHeader
                             title={item.itemowner.fullname}
-                            subtitle={moment(formatDate, 'YYYYMMDD').fromNow()}
+                            subtitle={moment(
+                                moment(item.created).format('YYYYMMDDa'),
+                                'YYYYMMDD'
+                            ).fromNow()}
                             avatar={
                                 <Gravatar
                                     email={item.itemowner.email}
@@ -46,7 +48,10 @@ const ItemCard = props => {
                 ) : (
                     <CardHeader
                         title={item.itemowner.fullname}
-                        subtitle={moment(item.created, 'YYYYMMDD').fromNow()}
+                        subtitle={moment(
+                            moment(item.created).format('YYYYMMDDa'),
+                            'YYYYMMDD'
+                        ).fromNow()}
                         avatar={
                             <Gravatar
                                 email={item.itemowner.email}

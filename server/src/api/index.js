@@ -26,7 +26,6 @@ export default function(app) {
     resolvers
   });
 
-  // Where we will send all of our GraphQL requests
   app.use(
     "/graphql",
     bodyParser.json(),
@@ -42,7 +41,6 @@ export default function(app) {
     })
   );
 
-  // A route for accessing the GraphiQL tool (like the github tool for their graphQL)
   app.use(
     "/graphiql",
     graphiqlExpress({
